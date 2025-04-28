@@ -1214,8 +1214,11 @@ def stream_generate(
             # Stop generation if the token is in the eos_token_ids
             if tokenizer.stopping_criteria(token):
                 break
-
-            detokenizer.add_token(token, skip_special_token_ids=skip_special_token_ids)
+            
+            if skip_special_token_ids:
+                detokenizer.add_token(token, skip_special_token_ids=skip_special_token_ids)
+            else:
+                detokenizer.add_token(token)
 
             # Yield the last segment if streaming
             yield GenerationResult(

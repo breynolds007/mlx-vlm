@@ -18,12 +18,18 @@ def parse_arguments():
         default="qnguyen3/nanoLLaVA",
         help="The path to the local model directory or Hugging Face repo.",
     )
+    parser.add_argument(
+        "--adapter-path",
+        type=str,
+        default=None,
+        help="The path to the saved adapter files.",
+    )
     return parser.parse_args()
 
 
 args = parse_arguments()
 config = load_config(args.model)
-model, processor = load(args.model, processor_kwargs={"trust_remote_code": True})
+model, processor = load(args.model, args.adapter_path, processor_kwargs={"trust_remote_code": True})
 image_processor = load_image_processor(args.model)
 
 
