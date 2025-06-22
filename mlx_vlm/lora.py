@@ -9,7 +9,7 @@ from tqdm import tqdm
 
 from .prompt_utils import apply_chat_template
 from .trainer import Dataset, Trainer, save_adapter
-from .trainer.utils import find_all_linear_names, get_peft_model, apply_lora_layers
+from .trainer.utils import apply_lora_layers, find_all_linear_names, get_peft_model
 from .utils import load, load_image_processor
 
 logging.basicConfig(level=logging.INFO)
@@ -178,7 +178,10 @@ if __name__ == "__main__":
         "--print-every", type=int, default=10, help="Print loss every n steps"
     )
     parser.add_argument(
-        "--lora-alpha", type=float, default=0.5, help="LoRA scaling factor (alpha / rank)"
+        "--lora-alpha",
+        type=float,
+        default=0.5,
+        help="LoRA scaling factor (alpha / rank)",
     )
     parser.add_argument("--lora-rank", type=int, default=10, help="LoRA rank")
     parser.add_argument("--lora-dropout", type=float, default=0.1, help="LoRA dropout")
